@@ -10,53 +10,52 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Category $category)
     {
-        $products = Product::all();
-        $categories = Category::all();
-        $brands = Brand::all();
-        return view('admin.products.index', compact('products','categories','brands'));
+        return view('admin.products.index', compact('category'));
     }
 
     public function create()
     {
         $categories = Category::all();
-        $brands = Brand::all();
 
-        return view('admin.products.create', compact('categories', 'brands'));
+        return view('admin.products.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
         $validatedData = $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'brand_id' => 'required|exists:brands,id',
-            'name' => 'required|max:255',
-            'model' => 'nullable|max:255',
-            'description' => 'nullable',
-            'quantity' => 'nullable|integer',
-            'image' => 'nullable|image',
-            'price' => 'nullable|numeric',
-            'on_discount' => 'nullable|boolean',
-            'discount_percentage' => 'nullable|numeric',
-            'qr_code' => 'nullable|max:255',
-            'bar_code' => 'nullable|max:255',
+            'image.*' => 'nullable|image',
         ]);
 
-        // Handle the uploaded image
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $name = $file->getClientOriginalName();
-            $file_name = time() . $name;
-            $path = $file->move('images/products', $file_name);
-            $validatedData['image'] = $path;
+        // Handle the uploaded images
+        if (request()->hasfile('image')) {
+
+            //get the file field data and name field from form submission
+            $uploadedFiles = request()->file('image');
+
+            foreach ($uploadedFiles as $file) {
+                //get file original name
+                $name = $file->getClientOriginalName();
+
+                $fileNameWithoutExtension = pathinfo($name, PATHINFO_FILENAME);
+
+                //create a unique file name using the time variable plus the name
+                $file_name = time() . $name;
+
+
+                //upload the file to a directory in Public folder
+                $product = $file->move('images/products', $file_name);
+
+                $validatedData['image'] = $product;
+
+                $category->add_products($validatedData);
+
+            }
         }
-
-        Product::create($validatedData);
-
-        return redirect()->route('products.index')
-            ->with('success', 'Product created successfully.');
+        return redirect('/admin/products/' . $category->id . '/index')->with('success', 'Products created successfully.');
     }
+
 
     public function show(Product $product)
     {

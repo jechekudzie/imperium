@@ -89,8 +89,8 @@
                                                            value="option">
                                                 </div>
                                             </th>
+                                            <th class="sort" data-sort="name" scope="col">Service Banner</th>
                                             <th class="sort" data-sort="name" scope="col">Service</th>
-                                            <th class="sort" data-sort="name" scope="col">Packages</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
@@ -103,8 +103,8 @@
                                                                value="option1">
                                                     </div>
                                                 </td>
+                                                <td class="owner"><img width="150" height="100" src="{{asset($service->image)}}"/></td>
                                                 <td class="owner">{{$service->name}}</td>
-                                                <td class="owner"><a href="{{url('admin/packages/create/'.$service->id)}}">Packages ({{$service->packages->count()}})</a></td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         {{--<li class="list-inline-item" data-bs-toggle="tooltip"
@@ -146,7 +146,7 @@
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
                                         <div class="modal-header bg-soft-info p-3">
-                                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Service</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close" id="close-modal"></button>
                                         </div>
@@ -166,11 +166,21 @@
                                                         </div>
                                                     </div>
 
+
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <label for="name"
+                                                                   class="form-label">Service Banner</label>
+                                                            <input type="file" name="image"
+                                                                   class="form-control rounded-pill mb-3"/>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="description"
                                                                    class="form-label">Description</label>
-                                                            <textarea name="description" class="editor form-control"
+                                                            <textarea name="description" class="form-control" id="editor"
                                                                       placeholder="Enter service description">
 
                                                             </textarea>

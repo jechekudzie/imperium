@@ -96,7 +96,7 @@
                                                 <td class="owner">{{$category->id}}</td>
                                                 <td class="owner">{{$category->name}}</td>
                                                 <td class="owner">{!! $category->description !!}</td>
-                                                <td class="owner"><a href="{{url('admin/products/index/'.$category->id)}}">Products ({{$category->products->count()}})</a></td>
+                                                <td class="owner"><a href="{{url('admin/products/'.$category->id.'/index')}}">Products ({{$category->products->count()}})</a></td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip"
@@ -155,7 +155,7 @@
                                                         <div>
                                                             <label for="description"
                                                                    class="form-label">Description</label>
-                                                            <textarea name="description" class="editor form-control"
+                                                            <textarea name="description" class="form-control" id="editor"
                                                                       placeholder="Enter package category description">
 
                                                             </textarea>
@@ -208,20 +208,6 @@
 @push('scripts')
     <!-- ckeditor -->
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-    <script type="text/javascript">
-        ClassicEditor
-            .create(document.querySelector('.editor'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $(function () {
             $(".datepicker").datepicker({

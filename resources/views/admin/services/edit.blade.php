@@ -73,7 +73,7 @@
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
                                         <form method="post" action="{{url('/admin/services/'.$service->id)}}" enctype="multipart/form-data">
-                                            @method('PATCH')
+                                            @method('PUT')
                                             @csrf
                                             <div class="modal-body">
                                                 <input type="hidden" id="id-field"/>
@@ -90,9 +90,18 @@
 
                                                     <div class="col-lg-12">
                                                         <div>
+                                                            <label for="name"
+                                                                   class="form-label">Service Banner</label>
+                                                            <input type="file" name="image"
+                                                                   class="form-control rounded-pill mb-3"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12">
+                                                        <div>
                                                             <label for="companyname-field"
                                                                    class="form-label">Description</label>
-                                                            <textarea name="description" class="form-control editor" required>
+                                                            <textarea name="description" class="form-control" id="editor" required>
                                                                 {!! $service->description !!}
                                                             </textarea>
                                                         </div>

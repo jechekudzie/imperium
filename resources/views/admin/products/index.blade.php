@@ -30,9 +30,12 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center flex-wrap gap-2">
                                 <div class="flex-grow-1">
+                                    <a href="{{url('/admin/categories')}}" class="btn btn-info"><i
+                                            class="ri-arrow-left-circle-fill me-1 align-bottom"></i> Back
+                                    </a>
                                     <button class="btn btn-info add-btn" data-bs-toggle="modal"
                                             data-bs-target="#showModal"><i
-                                            class="ri-add-fill me-1 align-bottom"></i> Add Products
+                                            class="ri-add-fill me-1 align-bottom"></i> Add {{$category->name}} Products
                                     </button>
                                 </div>
                             </div>
@@ -77,16 +80,14 @@
                                                            value="option">
                                                 </div>
                                             </th>
-                                            <th class="sort" data-sort="owner" scope="col">Product Image</th>
+
                                             <th class="sort" data-sort="owner" scope="col">Product</th>
-                                            <th class="sort" data-sort="owner" scope="col">Product Category</th>
-                                            <th class="sort" data-sort="owner" scope="col">Product brand</th>
-                                            <th class="sort" data-sort="owner" scope="col">Description</th>
+                                            <th class="sort" data-sort="owner" scope="col">Category</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
-                                        @foreach($products as $product)
+                                        @foreach($category->products as $product)
                                             <tr>
                                                 <td scope="row">
                                                     <div class="form-check">
@@ -94,11 +95,8 @@
                                                                value="option1">
                                                     </div>
                                                 </td>
-                                                <td class="owner"><img width="100" height="100" src="{{asset($product->image)}}"/></td>
-                                                <td class="owner">{{$product->name}}</td>
+                                                <td class="owner"><img width="150" height="100" src="{{asset($product->image)}}"/></td>
                                                 <td class="owner">{{$product->category->name}}</td>
-                                                <td class="owner">{{$product->brand->name}}</td>
-                                                <td class="owner">{!! $product->description !!}</td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip"
@@ -140,74 +138,29 @@
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
                                         <div class="modal-header bg-soft-info p-3">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add Product(s)</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"> Add {{$category->name}} Product(s)</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close" id="close-modal"></button>
                                         </div>
 
-                                        <form method="post" action="{{ url('/admin/products') }}" enctype="multipart/form-data">
+                                        <form method="post" action="{{ url('/admin/products/'.$category->id.'/store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="row g-3">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6"></div>
                                                         <div>
-                                                            <label for="category_id" class="form-label">Category</label>
-                                                            <select name="category_id" class="form-control rounded-pill mb-3">
-                                                                <option value="">Select a category</option>
-                                                                @foreach($categories as $category)
-                                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="name" class="form-label">Product Name</label>
-                                                            <input type="text" name="name" class="form-control rounded-pill mb-3" placeholder="Enter product name">
-                                                        </div>
-                                                        <div>
-                                                            <label for="model" class="form-label">Model</label>
-                                                            <input type="text" name="model" class="form-control rounded-pill mb-3" placeholder="Enter product model">
+                                                            <label for="name" class="form-label">Upload Products</label>
+                                                            <input type="file" name="image[]" multiple class="form-control rounded-pill mb-3" placeholder="Enter product name">
                                                         </div>
 
-                                                        <div>
-                                                            <label for="image" class="form-label">Image</label>
-                                                            <input type="file" name="image" class="form-control rounded-pill mb-3">
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div>
-                                                            <label for="brand_id" class="form-label">Brand</label>
-                                                            <select name="brand_id" class="form-control rounded-pill mb-3">
-                                                                <option value="">Select a brand</option>
-                                                                @foreach($brands as $brand)
-                                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="price" class="form-label">Price</label>
-                                                            <input type="number" name="price" class="form-control rounded-pill mb-3" placeholder="Enter product price">
-                                                        </div>
-                                                        <div>
-                                                            <label for="quantity" class="form-label">Quantity</label>
-                                                            <input type="number" name="quantity" class="form-control rounded-pill mb-3" placeholder="Enter product quantity">
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-12">
-
-                                                    <div>
-                                                        <label for="description" class="form-label">Description</label>
-                                                        <textarea name="description" class="editor form-control rounded-pill mb-3" placeholder="Enter product description"></textarea>
                                                     </div>
 
                                                 </div>
-                                            </div>
+
                                             <div class="modal-footer">
                                                 <div class="hstack gap-2 justify-content-end">
                                                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">Add Product</button>
+                                                    <button type="submit" class="btn btn-success">Add Product(s)</button>
                                                 </div>
                                             </div>
                                         </form>
