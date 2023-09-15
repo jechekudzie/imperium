@@ -5,9 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="big-deal">
-    <meta name="keywords" content="big-deal">
-    <meta name="author" content="big-deal">
+    <meta name="description" content="Imperium Branding Zimbabwe">
+    <meta name="keywords" content="Imperium Branding Zimbabwe">
+    <meta name="author" content="Imperium Branding Zimbabwe">
     <link rel="icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
     <link rel="shortcut icon" href="../assets/images/favicon/favicon.png" type="image/x-icon">
 
@@ -54,9 +54,9 @@
                 <div class="col-xl-5 col-md-7 col-sm-6">
                     <div class="top-header-left">
                         <div class="shpping-order">
-                            <h6>free shipping on order over $99 </h6>
+                            <h6>sales@imperium.co.zw</h6>
                         </div>
-                        <div class="app-link">
+                        {{--<div class="app-link">
                             <h6>
                                 Download aap
                             </h6>
@@ -65,7 +65,7 @@
                                 <li><a><i class="fa fa-android"></i></a></li>
                                 <li><a><i class="fa fa-windows"></i></a></li>
                             </ul>
-                        </div>
+                        </div>--}}
                     </div>
                 </div>
                 <div class="col-xl-7 col-md-5 col-sm-6">
@@ -323,7 +323,7 @@
                             <div class="contact-block">
                                 <div>
                                     <i class="fa fa-volume-control-phone"></i>
-                                    <span>call us<span>123-456-76890</span></span>
+                                    <span>call us<span>+263 242 255453</span></span>
                                 </div>
                             </div>
                             <div class="btn-group">
@@ -458,7 +458,7 @@
                                     <li><i class="fa fa-map-marker"></i>Address <br> Address-<span>Address</span>
                                     </li>
                                     <li><i class="fa fa-phone"></i>call us:
-                                        <span>0+263 242 255453, +263 773 937032</span></li>
+                                        <span>+263 242 255453, +263 773 937032</span></li>
                                     <li><i class="fa fa-envelope-o"></i>email us: sales@imperium.co.zw</li>
                                     {{--  <li><i class="fa fa-fax"></i>fax <span>123456</span></li>--}}
                                 </ul>
