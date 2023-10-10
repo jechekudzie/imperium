@@ -5,6 +5,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryImageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', [\App\Http\Controllers\SiteController::class,'welcome']);
 Route::get('/about_us', [\App\Http\Controllers\SiteController::class,'about_us']);
 Route::get('/contact_us', [\App\Http\Controllers\SiteController::class,'contact_us']);
+Route::get('/sub_categories/{category}', [\App\Http\Controllers\SiteController::class,'sub_categories']);
 Route::get('/services/{service}', [\App\Http\Controllers\SiteController::class,'services']);
 Route::get('/products', [\App\Http\Controllers\SiteController::class,'products']);
 
@@ -59,26 +61,35 @@ Route::get('/admin/categories/{category}', [CategoryController::class, 'show'])-
 Route::get('/admin/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::put('/admin/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
-//Category Images
-Route::resource('/admin/category_images', CategoryImageController::class );
 
-Route::get('/admin/brands', [BrandController::class, 'index'])->name('brands.index');
-Route::get('/admin/brands/create', [BrandController::class, 'create'])->name('brands.create');
-Route::post('/admin/brands', [BrandController::class, 'store'])->name('brands.store');
-Route::get('/admin/brands/{brand}', [BrandController::class, 'show'])->name('brands.show');
-Route::get('/admin/brands/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
-Route::put('/admin/brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
-Route::delete('/admin/brands/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+// Display all products
+Route::get('/admin/sub_categories/{category}/index', [SubCategoryController::class, 'index'])->name('sub_categories.index');
+// store products
+Route::post('/admin/sub_categories/{category}/store', [SubCategoryController::class, 'store'])->name('sub_categories.store');
+// Display the form to edit a specific product
+Route::get('/admin/sub_categories/{subCategory}/edit', [SubCategoryController::class, 'edit'])->name('sub_categories.edit');
+// Delete a specific product
+Route::delete('/admin/sub_categories/{subCategory}', [SubCategoryController::class, 'destroy'])->name('sub_categories.destroy');
+//Update a specific sub category
+Route::put('/admin/sub_categories/{subCategory}', [SubCategoryController::class, 'update'])->name('sub_categories.update');
 
 
 // Display all products
-Route::get('/admin/products/{category}/index', [ProductController::class, 'index'])->name('products.index');
+Route::get('/admin/products/{subCategory}/index', [ProductController::class, 'index'])->name('products.index');
 // store products
-Route::post('/admin/products/{category}/store', [ProductController::class, 'store'])->name('products.store');
+Route::post('/admin/products/{subCategory}/store', [ProductController::class, 'store'])->name('products.store');
 // Display the form to edit a specific product
 Route::get('/admin/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 // Delete a specific product
 Route::delete('/admin/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+//Update a specific product
+Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+
+
+//Category Images
+Route::resource('/admin/category_images', CategoryImageController::class );
+
 
 
 Route::get('/dashboard', function () {

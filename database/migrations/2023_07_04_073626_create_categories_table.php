@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
+            $table->longText('description')->nullable();
+            $table->boolean('is_published')->default(1);//1 is published 0 is un-published
             $table->timestamps();
         });
     }

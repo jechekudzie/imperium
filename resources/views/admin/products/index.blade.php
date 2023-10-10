@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Products</h4>
+                        <h4 class="mb-sm-0">{{$subCategory->name}} Products</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
@@ -30,12 +30,12 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center flex-wrap gap-2">
                                 <div class="flex-grow-1">
-                                    <a href="{{url('/admin/categories')}}" class="btn btn-info"><i
+                                    <a href="{{url('/admin/sub_categories/'.$subCategory->category->id.'/index')}}" class="btn btn-info"><i
                                             class="ri-arrow-left-circle-fill me-1 align-bottom"></i> Back
                                     </a>
                                     <button class="btn btn-info add-btn" data-bs-toggle="modal"
                                             data-bs-target="#showModal"><i
-                                            class="ri-add-fill me-1 align-bottom"></i> Add {{$category->name}} Products
+                                            class="ri-add-fill me-1 align-bottom"></i> Add {{$subCategory->name}} Products
                                     </button>
                                 </div>
                             </div>
@@ -82,12 +82,13 @@
                                             </th>
 
                                             <th class="sort" data-sort="owner" scope="col">Product</th>
+                                            <th class="sort" data-sort="owner" scope="col">Product Name</th>
                                             <th class="sort" data-sort="owner" scope="col">Category</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
-                                        @foreach($category->products as $product)
+                                        @foreach($subCategory->products as $product)
                                             <tr>
                                                 <td scope="row">
                                                     <div class="form-check">
@@ -96,7 +97,8 @@
                                                     </div>
                                                 </td>
                                                 <td class="owner"><img width="150" height="100" src="{{asset($product->image)}}"/></td>
-                                                <td class="owner">{{$product->category->name}}</td>
+                                                <td class="owner">{{$product->name}}</td>
+                                                <td class="owner">{{$product->sub_category->name}}</td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip"
@@ -138,24 +140,47 @@
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
                                         <div class="modal-header bg-soft-info p-3">
-                                            <h5 class="modal-title" id="exampleModalLabel"> Add {{$category->name}} Product(s)</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"> Add {{$subCategory->name}} Product(s)</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close" id="close-modal"></button>
                                         </div>
 
-                                        <form method="post" action="{{ url('/admin/products/'.$category->id.'/store') }}" enctype="multipart/form-data">
+                                        <form method="post" action="{{ url('/admin/products/'.$subCategory->id.'/store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="row g-3">
-                                                    <div class="col-lg-6"></div>
+                                                    <div class="col-lg-12">
                                                         <div>
-                                                            <label for="name" class="form-label">Upload Products</label>
-                                                            <input type="file" name="image[]" multiple class="form-control rounded-pill mb-3" placeholder="Enter product name">
+                                                            <label for="name"
+                                                                   class="form-label">Product</label>
+                                                            <input type="text" name="name"
+                                                                   class="form-control rounded-pill mb-3"
+                                                                   value="{{old('name')}}"
+                                                                   placeholder="Enter product"/>
                                                         </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <label for="name" class="form-label">Upload Product Image</label>
+                                                        <input type="file" name="image[]" multiple
+                                                               class="form-control rounded-pill mb-3"
+                                                               placeholder="Image upload">
+                                                    </div>
 
+
+                                                    <div class="col-lg-12">
+                                                        <div>
+                                                            <label for="description"
+                                                                   class="form-label">Description</label>
+                                                            <textarea name="description" class="form-control"
+                                                                      id="editor"
+                                                                      placeholder="Enter product description">
+
+                                                            </textarea>
+                                                        </div>
                                                     </div>
 
                                                 </div>
+                                            </div>
 
                                             <div class="modal-footer">
                                                 <div class="hstack gap-2 justify-content-end">

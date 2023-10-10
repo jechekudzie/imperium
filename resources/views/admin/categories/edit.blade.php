@@ -89,6 +89,13 @@
                                                     </div>
 
                                                     <div class="col-lg-12">
+                                                        <label for="name" class="form-label">Upload Category Cover</label>
+                                                        <input type="file" name="image[]" multiple
+                                                               class="form-control rounded-pill mb-3"
+                                                               placeholder="Image Upload">
+                                                    </div>
+
+                                                    <div class="col-lg-12">
                                                         <div>
                                                             <label for="companyname-field"
                                                                    class="form-label">Description</label>
@@ -111,6 +118,25 @@
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <!--end card-->
+                </div>
+
+                <div class="col-xxl-3">
+                    <div class="card" id="companyList">
+                        <div style="color: black;font-size: 18px;font-weight: bolder;" class="card-header">
+                            Current {{$category->name}}
+                        </div>
+
+
+                        <div class="card-body">
+                            <!--end add modal-->
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content border-0">
+                                        <img src="{{asset($category->image)}}" style="width: 300px;">
                                     </div>
                                 </div>
                         </div>

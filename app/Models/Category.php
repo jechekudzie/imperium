@@ -11,14 +11,15 @@ class Category extends Model
 
     protected $guarded = [];
 
-    public function products()
+
+    public function sub_categories()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(SubCategory::class);
     }
 
-    public function add_products($product)
+    public function add_sub_categories($sub_category)
     {
-        return $this->products()->create($product);
+        return $this->sub_categories()->create($sub_category);
     }
 
 }

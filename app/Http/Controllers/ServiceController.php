@@ -29,7 +29,7 @@ class ServiceController extends Controller
         //
         $service = request()->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         if (request()->hasfile('image')) {
@@ -61,7 +61,7 @@ class ServiceController extends Controller
     {
         $service_update = request()->validate([
             'name' => 'required',
-            'description' => 'required',
+            'description' => 'nullable',
         ]);
 
         if (request()->hasfile('image')) {

@@ -16,9 +16,19 @@ class SiteController extends Controller
         $categories = Category::all();
 
         $category = Category::find(1);
-        //dd($category->products);
         return view('welcome', compact('categories'));
     }
+    public function sub_categories(Category $category)
+    {
+        $categories = Category::all();
+
+       // dd($category->sub_categories);
+
+        return view('sub_categories', compact('categories','category'));
+    }
+
+
+
 
     public function products()
     {

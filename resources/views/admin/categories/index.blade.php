@@ -10,12 +10,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Product Categories</h4>
+                        <h4 class="mb-sm-0">Categories</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                                <li class="breadcrumb-item active">Product categories</li>
+                                <li class="breadcrumb-item active">categories</li>
                             </ol>
                         </div>
 
@@ -32,7 +32,7 @@
                                 <div class="flex-grow-1">
                                     <button class="btn btn-info add-btn" data-bs-toggle="modal"
                                             data-bs-target="#showModal"><i
-                                            class="ri-add-fill me-1 align-bottom"></i> Add Product category
+                                            class="ri-add-fill me-1 align-bottom"></i> Add category
                                     </button>
                                 </div>
                             </div>
@@ -50,8 +50,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
-            @endif
-            <!--end col-->
+                @endif
+                <!--end col-->
                 <div class="col-xxl-9">
                     <div class="card" id="companyList">
                         <div class="card-header">
@@ -80,7 +80,7 @@
                                             <th class="sort" data-sort="name" scope="col">id</th>
                                             <th class="sort" data-sort="owner" scope="col">Category</th>
                                             <th class="sort" data-sort="owner" scope="col">Description</th>
-                                            <th class="sort" data-sort="owner" scope="col">Products</th>
+                                            <th class="sort" data-sort="owner" scope="col">Sub Category</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
@@ -96,14 +96,17 @@
                                                 <td class="owner">{{$category->id}}</td>
                                                 <td class="owner">{{$category->name}}</td>
                                                 <td class="owner">{!! $category->description !!}</td>
-                                                <td class="owner"><a href="{{url('admin/products/'.$category->id.'/index')}}">Products ({{$category->products->count()}})</a></td>
+                                                <td class="owner"><a
+                                                        href="{{url('admin/sub_categories/'.$category->id.'/index')}}">Sub
+                                                        Categories ({{$category->sub_categories->count()}})</a></td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip"
                                                             data-bs-trigger="hover" data-bs-placement="top"
                                                             title="Edit">
                                                             <a class="edit-item-btn"
-                                                               href="{{url('/admin/categories/'.$category->id.'/edit')}}">Edit <i
+                                                               href="{{url('/admin/categories/'.$category->id.'/edit')}}">Edit
+                                                                <i
                                                                     class="ri-pencil-fill align-bottom text-muted"></i></a>
                                                         </li>
                                                     </ul>
@@ -143,19 +146,27 @@
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="name"
-                                                                   class="form-label">Product Category</label>
+                                                                   class="form-label">Category</label>
                                                             <input type="text" name="name"
                                                                    class="form-control rounded-pill mb-3"
                                                                    value="{{old('name')}}"
-                                                                   placeholder="Enter product categories eg. Generators, Solars, invertors"/>
+                                                                   placeholder="Enter category"/>
                                                         </div>
                                                     </div>
+                                                    <div class="col-lg-12">
+                                                        <label for="name" class="form-label">Upload Category Cover</label>
+                                                        <input type="file" name="image[]" multiple
+                                                               class="form-control rounded-pill mb-3"
+                                                               placeholder="Image upload">
+                                                    </div>
+
 
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="description"
                                                                    class="form-label">Description</label>
-                                                            <textarea name="description" class="form-control" id="editor"
+                                                            <textarea name="description" class="form-control"
+                                                                      id="editor"
                                                                       placeholder="Enter package category description">
 
                                                             </textarea>

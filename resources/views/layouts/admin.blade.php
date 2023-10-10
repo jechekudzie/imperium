@@ -24,7 +24,7 @@
     <link href="{{asset('administration/assets/css/app.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
     <link href="{{asset('administration/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
-    @notifyCss
+
     @stack('head')
 </head>
 
@@ -314,7 +314,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <script>document.write(new Date().getFullYear())</script>
-                        © Velzon.
+                        © Imperium.
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">

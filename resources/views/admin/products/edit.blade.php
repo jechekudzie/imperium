@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center flex-wrap gap-2">
                                 <div class="flex-grow-1">
-                                    <a href="{{url('/admin/products')}}" class="btn btn-info add-btn"><i
+                                    <a href="{{url('/admin/products/'.$product->sub_category_id.'/index')}}" class="btn btn-info add-btn"><i
                                             class="ri-arrow-left-line align-bottom"></i> Back
                                     </a>
                                 </div>
@@ -72,69 +72,49 @@
 
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
-                                        <form method="post" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
-                                            @csrf
+                                        <form method="post" action="{{url('/admin/products/'.$product->id)}}" enctype="multipart/form-data">
                                             @method('PUT')
+                                            @csrf
                                             <div class="modal-body">
+                                                <input type="hidden" id="id-field"/>
                                                 <div class="row g-3">
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-12">
                                                         <div>
-                                                            <label for="category_id" class="form-label">Category</label>
-                                                            <select name="category_id" class="form-control rounded-pill mb-3">
-                                                                <option value="">Select a category</option>
-                                                                @foreach($categories as $category)
-                                                                    <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                                                                        {{ $category->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="name" class="form-label">Product Name</label>
-                                                            <input type="text" name="name" class="form-control rounded-pill mb-3" placeholder="Enter product name" value="{{ $product->name }}">
-                                                        </div>
-                                                        <div>
-                                                            <label for="model" class="form-label">Model</label>
-                                                            <input type="text" name="model" class="form-control rounded-pill mb-3" placeholder="Enter product model" value="{{ $product->model }}">
-                                                        </div>
-                                                        <div>
-                                                            <label for="image" class="form-label">Image</label>
-                                                            <input type="file" name="image" class="form-control rounded-pill mb-3">
+                                                            <label for="companyname-field"
+                                                                   class="form-label">Product name</label>
+                                                            <input type="text" name="name" id="companyname-field"
+                                                                   class="form-control"
+                                                                   value="{{$product->name}}" required/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
+
+                                                    <div class="col-lg-12">
+                                                        <label for="name" class="form-label">Upload Product image</label>
+                                                        <input type="file" name="image[]" multiple
+                                                               class="form-control rounded-pill mb-3"
+                                                               placeholder="Image Upload">
+                                                    </div>
+
+                                                    <div class="col-lg-12">
                                                         <div>
-                                                            <label for="brand_id" class="form-label">Brand</label>
-                                                            <select name="brand_id" class="form-control rounded-pill mb-3">
-                                                                <option value="">Select a brand</option>
-                                                                @foreach($brands as $brand)
-                                                                    <option value="{{ $brand->id }}" {{ $brand->id == $product->brand_id ? 'selected' : '' }}>
-                                                                        {{ $brand->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="price" class="form-label">Price</label>
-                                                            <input type="number" name="price" class="form-control rounded-pill mb-3" placeholder="Enter product price" value="{{ $product->price }}">
-                                                        </div>
-                                                        <div>
-                                                            <label for="quantity" class="form-label">Quantity</label>
-                                                            <input type="number" name="quantity" class="form-control rounded-pill mb-3" placeholder="Enter product quantity" value="{{ $product->quantity }}">
+                                                            <label for="companyname-field"
+                                                                   class="form-label">Description</label>
+                                                            <textarea name="description" class="form-control" id="editor" required>
+                                                                {!! $product->description !!}
+                                                            </textarea>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-12">
-                                                    <div>
-                                                        <label for="description" class="form-label">Description</label>
-                                                        <textarea name="description" class="editor form-control rounded-pill mb-3" placeholder="Enter product description">{{ $product->description }}</textarea>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="hstack gap-2 justify-content-end">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">Update Product</button>
+                                                    <button type="button" class="btn btn-light"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-success" id="add-btn">Update Product
+                                                    </button>
+
                                                 </div>
                                             </div>
                                         </form>
@@ -146,6 +126,25 @@
                     <!--end card-->
                 </div>
                 <!--end col-->
+
+                <div class="col-xxl-3">
+                    <div class="card" id="companyList">
+                        <div style="color: black;font-size: 18px;font-weight: bolder;" class="card-header">
+                            Current {{$product->name}}
+                        </div>
+
+
+                        <div class="card-body">
+                            <!--end add modal-->
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content border-0">
+                                    <img src="{{asset($product->image)}}" style="width: 300px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end card-->
+                </div>
 
             </div>
             <!--end row-->

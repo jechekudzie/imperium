@@ -24,7 +24,31 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'description' => 'nullable',
         ]);
+
+        // Handle the uploaded images
+        if (request()->hasfile('image')) {
+
+            //get the file field data and name field from form submission
+            $uploadedFiles = request()->file('image');
+
+            foreach ($uploadedFiles as $file) {
+                //get file original name
+                $name = $file->getClientOriginalName();
+
+                $fileNameWithoutExtension = pathinfo($name, PATHINFO_FILENAME);
+
+                //create a unique file name using the time variable plus the name
+                $file_name = time() . $name;
+
+                //upload the file to a directory in Public folder
+                $path = $file->move('images/categories', $file_name);
+
+                $validatedData['image'] = $path;
+
+            }
+        }
 
         Category::create($validatedData);
 
@@ -46,7 +70,32 @@ class CategoryController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'description' => 'nullable',
         ]);
+
+        // Handle the uploaded images
+        if (request()->hasfile('image')) {
+
+            //get the file field data and name field from form submission
+            $uploadedFiles = request()->file('image');
+
+            foreach ($uploadedFiles as $file) {
+                //get file original name
+                $name = $file->getClientOriginalName();
+
+                $fileNameWithoutExtension = pathinfo($name, PATHINFO_FILENAME);
+
+                //create a unique file name using the time variable plus the name
+                $file_name = time() . $name;
+
+
+                //upload the file to a directory in Public folder
+                $product = $file->move('images/categories', $file_name);
+
+                $validatedData['image'] = $product;
+
+            }
+        }
 
         $category->update($validatedData);
 
