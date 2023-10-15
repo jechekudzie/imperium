@@ -10,12 +10,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Categories</h4>
+                        <h4 class="mb-sm-0">Our team</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                                <li class="breadcrumb-item active">categories</li>
+                                <li class="breadcrumb-item active">our_team</li>
                             </ol>
                         </div>
 
@@ -32,7 +32,7 @@
                                 <div class="flex-grow-1">
                                     <button class="btn btn-info add-btn" data-bs-toggle="modal"
                                             data-bs-target="#showModal"><i
-                                            class="ri-add-fill me-1 align-bottom"></i> Add category
+                                            class="ri-add-fill me-1 align-bottom"></i> Add Team Member
                                     </button>
                                 </div>
                             </div>
@@ -57,46 +57,30 @@
                         <div class="card-body">
                             <div>
                                 <div class="table-responsive table-card mb-3">
-                                    <table id="example" class=" display {{--table--}} {{--align-middle--}} table-nowrap mb-0">
+                                    <table id="example"
+                                           class=" display {{--table--}} {{--align-middle--}} table-nowrap mb-0">
                                         <thead class="table-light">
                                         <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll"
-                                                           value="option">
-                                                </div>
-                                            </th>
-                                            <th class="sort" data-sort="name" scope="col">id</th>
-                                            <th class="sort" data-sort="owner" scope="col">Category</th>
-                                            <th class="sort" data-sort="owner" scope="col">Description</th>
-                                            <th class="sort" data-sort="owner" scope="col">Sub Category</th>
+                                            <th class="sort" data-sort="owner" scope="col">Our Team</th>
+                                            <th class="sort" data-sort="owner" scope="col">Bio</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody class="list form-check-all">
-                                        @foreach($categories as $category)
+                                        @foreach($our_team as $member)
                                             <tr>
-                                                <td scope="row">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="chk_child"
-                                                               value="option1">
-                                                    </div>
-                                                </td>
-                                                <td class="owner">{{$category->id}}</td>
-                                                <td class="owner">{{$category->name}}</td>
-                                                <td class="owner">{!! $category->description !!}</td>
-                                                <td class="owner"><a
-                                                        href="{{url('admin/sub_categories/'.$category->id.'/index')}}">Sub
-                                                        Categories ({{$category->sub_categories->count()}})</a></td>
+
+                                                <td class="owner">{{$member->name}}</td>
+                                                <td class="owner">{!! $member->bio !!}</td>
                                                 <td>
                                                     <ul class="list-inline hstack gap-2 mb-0">
                                                         <li class="list-inline-item" data-bs-toggle="tooltip"
                                                             data-bs-trigger="hover" data-bs-placement="top"
                                                             title="Edit">
                                                             <a class="edit-item-btn"
-                                                               href="{{url('/admin/categories/'.$category->id.'/edit')}}">Edit
-                                                                <i
-                                                                    class="ri-pencil-fill align-bottom text-muted"></i></a>
+                                                               href="{{url('/admin/our_team/'.$member->id.'/edit')}}">Edit
+                                                                <i class="ri-pencil-fill align-bottom text-muted"></i>
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </td>
@@ -116,7 +100,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close" id="close-modal"></button>
                                         </div>
-                                        <form method="post" action="{{url('/admin/categories')}}"
+                                        <form method="post" action="{{url('/admin/our_team')}}"
                                               enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
@@ -124,15 +108,15 @@
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="name"
-                                                                   class="form-label">Category</label>
+                                                                   class="form-label">Our Team</label>
                                                             <input type="text" name="name"
                                                                    class="form-control rounded-pill mb-3"
                                                                    value="{{old('name')}}"
-                                                                   placeholder="Enter category"/>
+                                                                   placeholder="Enter name"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
-                                                        <label for="name" class="form-label">Upload Category Cover</label>
+                                                        <label for="name" class="form-label">Upload Profile</label>
                                                         <input type="file" name="image[]" multiple
                                                                class="form-control rounded-pill mb-3"
                                                                placeholder="Image upload">
@@ -142,10 +126,10 @@
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="description"
-                                                                   class="form-label">Description</label>
-                                                            <textarea name="description" class="form-control"
+                                                                   class="form-label">Bio</label>
+                                                            <textarea name="bio" class="form-control"
                                                                       id="editor"
-                                                                      placeholder="Enter package category description">
+                                                                      placeholder="Enter team member bio">
 
                                                             </textarea>
                                                         </div>
@@ -159,7 +143,7 @@
                                                             data-bs-dismiss="modal">Close
                                                     </button>
                                                     <button type="submit" class="btn btn-success">Add
-                                                        Category
+                                                        Our Team
                                                     </button>
 
                                                 </div>

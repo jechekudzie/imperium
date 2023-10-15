@@ -10,12 +10,12 @@
             <div class="row">
                 <div class="col-12">
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0">Product Category</h4>
+                        <h4 class="mb-sm-0">Our team</h4>
 
                         <div class="page-title-right">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">CRM</a></li>
-                                <li class="breadcrumb-item active">Product Category</li>
+                                <li class="breadcrumb-item active">Our team</li>
                             </ol>
                         </div>
 
@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center flex-wrap gap-2">
                                 <div class="flex-grow-1">
-                                    <a href="{{url('/admin/categories')}}" class="btn btn-info add-btn"><i
+                                    <a href="{{url('/admin/our_team')}}" class="btn btn-info add-btn"><i
                                             class="ri-arrow-left-line align-bottom"></i> Back
                                     </a>
                                 </div>
@@ -63,7 +63,7 @@
                 <div class="col-xxl-9">
                     <div class="card" id="companyList">
                         <div style="color: black;font-size: 18px;font-weight: bolder;" class="card-header">
-                            Edit: {{$category->name}}
+                            Edit: {{$ourTeam->name}}
                         </div>
 
 
@@ -72,7 +72,7 @@
 
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
-                                        <form method="post" action="{{url('/admin/categories/'.$category->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{url('/admin/our_team/'.$ourTeam->id)}}" enctype="multipart/form-data">
                                             @method('PUT')
                                             @csrf
                                             <div class="modal-body">
@@ -84,12 +84,12 @@
                                                                    class="form-label">Product category</label>
                                                             <input type="text" name="name" id="companyname-field"
                                                                    class="form-control"
-                                                                   value="{{$category->name}}" required/>
+                                                                   value="{{$ourTeam->name}}" required/>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-12">
-                                                        <label for="name" class="form-label">Upload Category Cover</label>
+                                                        <label for="name" class="form-label">Upload  Profile</label>
                                                         <input type="file" name="image[]" multiple
                                                                class="form-control rounded-pill mb-3"
                                                                placeholder="Image Upload">
@@ -98,9 +98,9 @@
                                                     <div class="col-lg-12">
                                                         <div>
                                                             <label for="companyname-field"
-                                                                   class="form-label">Description</label>
-                                                            <textarea name="description" class="form-control editor" required>
-                                                                {!! $category->description !!}
+                                                                   class="form-label">Bio</label>
+                                                            <textarea name="bio" class="form-control editor" required>
+                                                                {!! $ourTeam->bio !!}
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -128,7 +128,7 @@
                 <div class="col-xxl-3">
                     <div class="card" id="companyList">
                         <div style="color: black;font-size: 18px;font-weight: bolder;" class="card-header">
-                            Current {{$category->name}}
+                            Current {{$ourTeam->name}}
                         </div>
 
 
@@ -136,7 +136,7 @@
                             <!--end add modal-->
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
                                     <div class="modal-content border-0">
-                                        <img src="{{asset($category->image)}}" style="width: 300px;">
+                                        <img src="{{asset($ourTeam->image)}}" style="width: 300px;">
                                     </div>
                                 </div>
                         </div>

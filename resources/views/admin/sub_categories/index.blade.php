@@ -56,23 +56,13 @@
                     </div>
                 @endif
                 <!--end col-->
-                <div class="col-xxl-9">
+                <div class="col-xxl-12">
                     <div class="card" id="companyList">
-                        <div class="card-header">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="search-box">
-                                        <input type="text" class="form-control search"
-                                               placeholder="Search for company...">
-                                        <i class="ri-search-line search-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="card-body">
                             <div>
                                 <div class="table-responsive table-card mb-3">
-                                    <table class="table align-middle table-nowrap mb-0">
+                                    <table id="example" class="display {{--table align-middle table-nowrap--}} mb-0">
                                         <thead class="table-light">
                                         <tr>
                                             <th scope="col" style="width: 50px;">
@@ -121,17 +111,6 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="d-flex justify-content-end mt-3">
-                                    <div class="pagination-wrap hstack gap-2">
-                                        <a class="page-item pagination-prev disabled" href="#">
-                                            Previous
-                                        </a>
-                                        <ul class="pagination listjs-pagination mb-0"></ul>
-                                        <a class="page-item pagination-next" href="#">
-                                            Next
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                             <!-- add modal-->
@@ -204,17 +183,8 @@
                     <!--end card-->
                 </div>
                 <!--end col-->
-                <div class="col-xxl-3">
-                    <div class="card" id="company-view-detail">
 
-                        <div class="card-body">
-                            <h6 class="text-muted text-uppercase fw-semibold mb-3">Section Description</h6>
-                            <p class="text-muted mb-4">Description of this page comes here</p>
-                        </div>
-                    </div>
-                    <!--end card-->
-                </div>
-                <!--end col-->
+
             </div>
             <!--end row-->
 

@@ -4,6 +4,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryImageController;
+use App\Http\Controllers\OurTeamController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -86,8 +87,9 @@ Route::delete('/admin/products/{product}', [ProductController::class, 'destroy']
 Route::put('/admin/products/{product}', [ProductController::class, 'update'])->name('products.update');
 
 
-
 //Category Images
+Route::resource('/admin/our_team', OurTeamController::class );
+
 Route::resource('/admin/category_images', CategoryImageController::class );
 
 

@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
+use App\Models\OurTeam;
 use App\Models\SubCategory;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-class ProductController extends Controller
+class OurTeamController extends Controller
 {
-    public function index(SubCategory $subCategory)
+    //
+    public function index()
     {
-        return view('admin.products.index', compact('subCategory'));
+        $our_team  = OurTeam::all();
+        return view('admin.our_team.index', compact('our_team'));
     }
 
-    public function store(Request $request, SubCategory $subCategory)
+    public function store(Request $request, )
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'description' => 'nullable',
+            'bio' => 'nullable',
             'image.*' => 'nullable|image',
         ]);
 
-        
         // Handle the uploaded images
         if (request()->hasfile('image')) {
 
@@ -49,28 +49,28 @@ class ProductController extends Controller
             }
         }
 
-        $subCategory->add_products($validatedData);
+       OurTeam::create($validatedData);
 
-        return redirect('/admin/products/' . $subCategory->id . '/index')->with('success', 'Product added successfully.');
+        return back()->with('success', 'Team added successfully.');
 
     }
 
 
-    public function show(Product $product)
+    public function show(OurTeam $ourTeam)
     {
-        return view('admin.products.show', compact('product'));
+        return view('admin.our_team.show', compact('ourTeam'));
     }
 
-    public function edit(Product $product)
+    public function edit(OurTeam $ourTeam)
     {
-        return view('admin.products.edit', compact('product'));
+        return view('admin.our_team.edit', compact('ourTeam'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, OurTeam $ourTeam)
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'description' => 'nullable',
+            'bio' => 'nullable',
             'image.*' => 'nullable|image',
         ]);
 
@@ -91,12 +91,12 @@ class ProductController extends Controller
 
 
                 //upload the file to a directory in Public folder
-                $path = $file->move('images/products', $file_name);
+                $path = $file->move('images/our_team', $file_name);
 
-                if ($product->image !== null) {
-                    if (File::exists(public_path($product->image))) {
+                if ($ourTeam->image !== null) {
+                    if (File::exists(public_path($ourTeam->image))) {
 
-                        File::delete(public_path($product->image));
+                        File::delete(public_path($ourTeam->image));
                     }
 
                 }
@@ -105,22 +105,22 @@ class ProductController extends Controller
             }
         }
 
-        $product->update($validatedData);
+        $ourTeam->update($validatedData);
 
-        return redirect('admin/products/' . $product->sub_category_id . '/index')
-            ->with('success', 'Product updated successfully.');
+        return redirect('admin/our_team')
+            ->with('success', 'Team member updated successfully.');
     }
 
     // Delete the previous image if it exists
 
-    public function destroy(Product $product)
+    public function destroy(OurTeam $ourTeam)
     {
 
-        $id = $product->sub_category_id;
+        $id = $ourTeam->id;
 
-        $product->delete();
+        $ourTeam->delete();
 
-        return redirect('admin/products/' . $id . '/index')
-            ->with('success', 'Product updated successfully.');
+        return redirect('admin/our_team')
+            ->with('success', 'Team member deleted successfully.');
     }
 }

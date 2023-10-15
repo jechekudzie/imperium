@@ -25,6 +25,10 @@
     <!-- custom Css-->
     <link href="{{asset('administration/assets/css/custom.min.css')}}" rel="stylesheet" type="text/css"/>
 
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+
     @stack('head')
 </head>
 
@@ -281,6 +285,11 @@
                                         SERVICES </a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a href="{{url('/admin/our_team')}}" class="nav-link active" data-key="t-analytics">
+                                        Our Team </a>
+                                </li>
+
 
                             </ul>
                         </div>
@@ -357,6 +366,12 @@
 <!-- App js -->
 <script src="{{asset('administration/assets/js/app.js')}}"></script>
 
+<!-- jQuery library -->
+{{--
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+--}}
+
+
 <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('/ckeditor/adapters/jquery.js')}}"></script>
 <script src="{{asset('/ckeditor/styles.js')}}"></script>
@@ -364,12 +379,35 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<!-- DataTables JS -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 <script>
     $(function () {
         $(".datepicker").datepicker({
             dateFormat: "yy-mm-dd"
         });
     });
+
+/*    $(document).ready( function () {
+        $('#example').DataTable({
+            "paging": true,         // Enable or disable pagination
+            "ordering": true,       // Enable or disable sorting
+            "info": true,           // Display info about the table
+            "searching": true,      // Enable or disable the search box
+            "pageLength": 10,       // Number of rows per page
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]], // Dropdown menu for pagination
+
+        });
+    } );*/
+
+    $(document).ready( function () {
+        $('#example').DataTable();
+    } );
+
+
+
 </script>
 @stack('scripts')
 
