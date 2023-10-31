@@ -84,7 +84,7 @@
                                                 </td>
                                                 <td class="owner">{{$category->id}}</td>
                                                 <td class="owner">{{$category->name}}</td>
-                                                <td class="owner">{!! $category->description !!}</td>
+                                                <td class="owner">{!! substr($category->description,0,50) !!}</td>
                                                 <td class="owner"><a
                                                         href="{{url('admin/sub_categories/'.$category->id.'/index')}}">Sub
                                                         Categories ({{$category->sub_categories->count()}})</a></td>

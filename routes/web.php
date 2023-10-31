@@ -25,6 +25,8 @@ Route::get('/', [\App\Http\Controllers\SiteController::class,'welcome']);
 Route::get('/about_us', [\App\Http\Controllers\SiteController::class,'about_us']);
 Route::get('/contact_us', [\App\Http\Controllers\SiteController::class,'contact_us']);
 Route::get('/sub_categories/{category}', [\App\Http\Controllers\SiteController::class,'sub_categories']);
+Route::get('/sub_category_details/{subCategory}', [\App\Http\Controllers\SiteController::class,'sub_category_details']);
+Route::get('/product/{product}', [\App\Http\Controllers\SiteController::class,'product']);
 Route::get('/services/{service}', [\App\Http\Controllers\SiteController::class,'services']);
 Route::get('/products', [\App\Http\Controllers\SiteController::class,'products']);
 

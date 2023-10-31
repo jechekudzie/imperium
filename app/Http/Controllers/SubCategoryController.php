@@ -106,8 +106,7 @@ class SubCategoryController extends Controller
 
         $subCategory->update($validatedData);
 
-        return redirect('/admin/sub_categories/'.$subCategory->category->id.'/index')
-            ->with('success', 'Sub Category updated successfully.');
+        return back()->with('success', 'Sub Category updated successfully.');
     }
 
     public function destroy(Product $product)

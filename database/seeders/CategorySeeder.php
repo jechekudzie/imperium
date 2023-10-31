@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -93,19 +94,13 @@ class CategorySeeder extends Seeder
         // Seed the categories and subcategories
         foreach ($categories as $categoryName => $subcategories) {
             // Create the category
-            $categoryId = DB::table('categories')->insertGetId([
-                'name' => ucfirst($categoryName),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
+            $category = Category::create(['name' => ucfirst($categoryName)]);
+    
             // Seed the subcategories for the category
             foreach ($subcategories as $subcategoryName) {
-                DB::table('sub_categories')->insert([
-                    'category_id' => $categoryId,
+                SubCategory::create([
+                    'category_id' => $category->id,
                     'name' => ucfirst($subcategoryName),
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ]);
             }
         }

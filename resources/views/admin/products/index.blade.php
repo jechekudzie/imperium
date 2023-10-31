@@ -57,21 +57,11 @@
             <!--end col-->
                 <div class="col-xxl-12">
                     <div class="card" id="companyList">
-                        <div class="card-header">
-                            <div class="row g-2">
-                                <div class="col-md-3">
-                                    <div class="search-box">
-                                        <input type="text" class="form-control search"
-                                               placeholder="Search for company...">
-                                        <i class="ri-search-line search-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
                         <div class="card-body">
                             <div>
                                 <div class="table-responsive table-card mb-3">
-                                    <table class="table align-middle table-nowrap mb-0">
+                                    <table id="example" class="display {{--table align-middle table-nowrap--}} mb-0">
                                         <thead class="table-light">
                                         <tr>
                                             <th scope="col" style="width: 50px;">
@@ -122,17 +112,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="d-flex justify-content-end mt-3">
-                                    <div class="pagination-wrap hstack gap-2">
-                                        <a class="page-item pagination-prev disabled" href="#">
-                                            Previous
-                                        </a>
-                                        <ul class="pagination listjs-pagination mb-0"></ul>
-                                        <a class="page-item pagination-next" href="#">
-                                            Next
-                                        </a>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <!-- add modal-->
                             <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -213,20 +193,6 @@
 @push('scripts')
     <!-- ckeditor -->
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
-    <script type="text/javascript">
-        ClassicEditor
-            .create(document.querySelector('.editor'))
-            .then(editor => {
-                console.log(editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $(function () {
             $(".datepicker").datepicker({
@@ -236,3 +202,4 @@
     </script>
 
 @endpush
+

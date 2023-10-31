@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center flex-wrap gap-2">
                                 <div class="flex-grow-1">
-                                    <a href="{{url('/admin/categories')}}" class="btn btn-info add-btn"><i
+                                    <a href="{{url('/admin/sub_categories/'.$subCategory->category_id.'/index')}}" class="btn btn-info add-btn"><i
                                             class="ri-arrow-left-line align-bottom"></i> Back
                                     </a>
                                 </div>
@@ -99,7 +99,7 @@
                                                         <div>
                                                             <label for="companyname-field"
                                                                    class="form-label">Description</label>
-                                                            <textarea name="description" class="form-control editor" required>
+                                                            <textarea name="description" class="form-control" id="editor" required>
                                                                 {!! $subCategory->description !!}
                                                             </textarea>
                                                         </div>

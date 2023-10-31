@@ -11,7 +11,6 @@ class Category extends Model
 
     protected $guarded = [];
 
-
     public function sub_categories()
     {
         return $this->hasMany(SubCategory::class);
@@ -21,5 +20,4 @@ class Category extends Model
     {
         return $this->sub_categories()->create($sub_category);
     }
-
 }

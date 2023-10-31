@@ -51,7 +51,8 @@ class ProductController extends Controller
 
         $subCategory->add_products($validatedData);
 
-        return redirect('/admin/products/' . $subCategory->id . '/index')->with('success', 'Product added successfully.');
+        return back()->with('success', 'Product added successfully.');
+        //return redirect('/admin/products/' . $subCategory->id . '/index')->with('success', 'Product added successfully.');
 
     }
 

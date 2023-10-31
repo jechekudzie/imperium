@@ -65,12 +65,7 @@
                                     <table id="example" class="display {{--table align-middle table-nowrap--}} mb-0">
                                         <thead class="table-light">
                                         <tr>
-                                            <th scope="col" style="width: 50px;">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="checkAll"
-                                                           value="option">
-                                                </div>
-                                            </th>
+                                    
                                             <th class="sort" data-sort="name" scope="col">id</th>
                                             <th class="sort" data-sort="owner" scope="col">Name</th>
                                             <th class="sort" data-sort="owner" scope="col">Category</th>
@@ -82,16 +77,11 @@
                                         <tbody class="list form-check-all">
                                         @foreach($category->sub_categories as $sub_category)
                                             <tr>
-                                                <td scope="row">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="chk_child"
-                                                               value="option1">
-                                                    </div>
-                                                </td>
+                                            
                                                 <td class="owner">{{$sub_category->id}}</td>
                                                 <td class="owner">{{$sub_category->name}}</td>
                                                 <td class="owner">{!! $sub_category->category->name !!}</td>
-                                                <td class="owner">{!! $sub_category->description !!}</td>
+                                                <td class="owner">{!! substr($sub_category->description, 0, 50) !!}....</td>
                                                 <td class="owner"><a
                                                         href="{{url('admin/products/'.$sub_category->id.'/index')}}">
                                                         Products ({{$sub_category->products->count()}})</a></td>

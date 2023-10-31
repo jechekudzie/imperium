@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\Service;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     //
+
 
     public function welcome()
     {
@@ -18,17 +21,30 @@ class SiteController extends Controller
         $category = Category::find(1);
         return view('welcome', compact('categories'));
     }
+
+
     public function sub_categories(Category $category)
     {
-        $categories = Category::all();
 
-       // dd($category->sub_categories);
+        return view('sub_categories', compact('category'));
+    }
 
-        return view('sub_categories', compact('categories','category'));
+    public function sub_category_details(SubCategory $subCategory)
+    {
+
+      //  dd($subCategory->products);
+      $subCategoryImage = Product::where('sub_category_id', $subCategory->id)
+      ->whereNotNull('image')
+      ->first('image');
+        return view('sub_category_details', compact('subCategory','subCategoryImage'));
     }
 
 
+    public function product(Product  $product)
+    {
 
+        return view('product_detail', compact('product'));
+    }
 
     public function products()
     {
@@ -36,6 +52,7 @@ class SiteController extends Controller
 
         return view('products', compact('categories'));
     }
+
 
 
     public function about_us()

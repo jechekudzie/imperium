@@ -14,12 +14,12 @@ class AboutUsController extends Controller
         return view('admin.about_us.index', compact('about_us'));
     }
 
-    public function show(About $about)
+         public function show(About $about)
     {
         return view('admin.about_us.show', compact('about'));
     }
 
-    public function create()
+        public function create()
     {
         return view('admin.about_us.create');
     }
@@ -27,7 +27,7 @@ class AboutUsController extends Controller
     public function store(Request $request)
     {
         //
-        $about = request()->validate([
+            $about = request()->validate([
             'description' => 'required',
         ]);
 
